@@ -1,0 +1,103 @@
+<form style="margin: 1%;" #cpu="ngForm" (ngSubmit)="add(cpu)">
+    <div class="form-group row">
+        <div class="col">
+            <label class="form-label col" for="brand">
+                Brand
+            </label>
+        </div>
+        <div class="col">
+            <input required (ngModel)="cpu.brand" id="brand" class="form-control" type="text" name="brand" placeholder="Brand" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col">
+            <label class="form-label col" for="model">
+                Model
+            </label>
+        </div>
+        <div class="col">
+            <input required (ngModel)="cpu.model" id="model" class="form-control" type="text" name="model" placeholder="Model" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col">
+            <label class="form-label col" for="clockSpeed">
+                Clock speed
+            </label>
+        </div>
+        <div class="col">
+            <div class="input-group">
+                <input required (ngModel)="cpu.clockSpeed" id="clockSpeed" class="form-control" type="number" step="0.01" name="clockSpeed" value="0" />
+                <p class="input-group-text">
+                    GHz
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col">
+            <label class="form-label col" for="coreNumber">
+                Number of cores
+            </label>
+        </div>
+        <div class="col">
+            <input required (ngModel)="cpu.coreNumber" id="coreNumber" class="form-control" type="number" name="coreNumber" value="0" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col">
+            <label class="form-label col" for="threadNumber">
+                Number of threads
+            </label>
+        </div>
+        <div class="col">
+            <input required (ngModel)="cpu.threadNumber" id="threadNumber" class="form-control" type="number" name="threadNumber" value="0" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col">
+            <label class="form-label col" for="tdp">
+                TDP
+            </label>
+        </div>
+        <div class="col">
+            <div class="input-group">
+                <input required (ngModel)="cpu.tdp" id="tdp" class="form-control" type="number" name="tdp" value="0" />
+                <p class="input-group-text">
+                    W
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col">
+            <label class="form-label col" for="price">
+                Price
+            </label>
+        </div>
+        <div class="col">
+            <div class="input-group">
+                <input required (ngModel)="cpu.price" id="price" class="form-control" type="number" step="0.01" name="price" value="0" />
+                <p class="input-group-text">
+                    €
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col">
+            <label class="form-label col" for="socket">
+                Socket
+            </label>
+        </div>
+        <div class="col">
+            <select (ngModel)='cpu.socket' name="socket" id="socket" class="form-control" aria-placeholder="Socket" >
+                <option *ngFor="let socket of socketList" value={{socket.id}}>{{socket.name}}</option>
+            </select>
+        </div>
+    </div>
+    <hr />
+    <div class="form-group row" style="float: right;">
+        <input required id="submit" class="btn btn-outline-success" type="submit" value="Submit" />
+    </div>
+</form>

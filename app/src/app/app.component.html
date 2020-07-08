@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row justify-content-center">
+  <div class="col-md-12" style="margin-top: 4%">      
+    <h1>{{title}}</h1>
+    <table class="table table-stripped">
+      <thead class="thead-dark">
+        <th>Brand</th>
+        <th>Model</th>
+        <th>Socket</th>
+        <th></th>
+      </thead>
+      <tr *ngFor="let cpu of cpuList">
+        <td>{{cpu?.brand}}</td>
+        <td>{{cpu?.model}}</td>
+        <td>{{cpu?.socket?.name}}</td>
+        <td><button class="btn btn-link">Edit</button></td>
+      </tr>
+      <tfoot>
+        <button class="btn btn-link" (click)="openAddForm()">Add</button>
+      </tfoot>
+    </table>
+  </div>
+  </div>
+</div>
+<div *ngIf="isOpen" class="container-fluid" style="position: absolute; width: 100%; height: 100%; top: 0px; left: 0px; background-color: rgba(0,0,0,0.7);">
+  <div class="row justify-content-center">
+    <div class="col-md-5" id="window" style="background-color:white; border: 1px black; border-radius: 5px; margin-top: 10px; padding: 1%;">
+      <button class="btn btn-outline-danger" (click)="closeAddForm()" style="float:right;">&times;</button>
+      <h2>Add new model</h2>
+      <hr />
+      <app-add></app-add>
+    </div>
+  </div>
+</div>
