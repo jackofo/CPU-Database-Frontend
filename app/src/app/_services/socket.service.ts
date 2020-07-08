@@ -17,8 +17,8 @@ export class SocketService
     return this.http.get<Socket[]>(this.url + '/all');
   }
 
-  Get(id) : Observable<Socket>
+  Get(id : number) : Observable<Socket>
   {
-    return this.http.get<Socket>(this.url + '/get?id=' + id);
+    return this.http.get<Socket>(this.url + '/get?id=' + id.toString());
   }
 }
