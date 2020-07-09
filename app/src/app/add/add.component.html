@@ -1,25 +1,41 @@
-<form style="margin: 1%;" #cpu="ngForm" (ngSubmit)="add(cpu)">
-    <div class="form-group row">
+<button *ngIf="editing && !adding" class="btn btn-primary" style="margin-left: 1vw;" (click)="editingSwitch()">
+    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+    </svg>
+</button>
+<button *ngIf="!editing && !adding" class="btn btn-outline-primary" style="margin-left: 1vw;" (click)="editingSwitch()">
+    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+    </svg>
+</button>
+<br *ngIf="adding" />
+<hr />
+<form style="margin: 1vw;" #cpuForm="ngForm" (ngSubmit)="add()">
+    <div class="form-group row" style="min-height:40px;">
         <div class="col">
             <label class="form-label col" for="brand">
                 Brand
             </label>
         </div>
         <div class="col">
-            <input required (ngModel)="cpu.brand" id="brand" class="form-control" type="text" name="brand" placeholder="Brand" />
+            <input *ngIf="editing" type="text" [(ngModel)]="cpu.brand" id="brand" class="form-control" name="brand" placeholder="Brand" required />
+            <p *ngIf="!editing" id="brand">{{cpu.brand}}</p>
         </div>
     </div>
-    <div class="form-group row">
+    <div class="form-group row" style="min-height:40px;">
         <div class="col">
             <label class="form-label col" for="model">
                 Model
             </label>
         </div>
         <div class="col">
-            <input required (ngModel)="cpu.model" id="model" class="form-control" type="text" name="model" placeholder="Model" />
+            <input  *ngIf="editing" required [(ngModel)]="cpu.model" id="model" class="form-control" type="text" name="model" placeholder="Model" />
+            <p *ngIf="!editing" id="brand">{{cpu.model}}</p>
         </div>
     </div>
-    <div class="form-group row">
+    <div class="form-group row" style="min-height:40px;">
         <div class="col">
             <label class="form-label col" for="clockSpeed">
                 Clock speed
@@ -27,34 +43,39 @@
         </div>
         <div class="col">
             <div class="input-group">
-                <input required (ngModel)="cpu.clockSpeed" id="clockSpeed" class="form-control" type="number" step="0.01" name="clockSpeed" value="0" />
-                <p class="input-group-text">
+                <input  *ngIf="editing" required [(ngModel)]="cpu.clockSpeed" id="clockSpeed" class="form-control" type="number" step="0.01" name="clockSpeed"  />
+                <p *ngIf="!editing" id="brand">
+                    {{cpu.clockSpeed}} GHz
+                </p>
+                <p *ngIf="editing" class="input-group-text">
                     GHz
                 </p>
             </div>
         </div>
     </div>
-    <div class="form-group row">
+    <div class="form-group row" style="min-height:40px;">
         <div class="col">
             <label class="form-label col" for="coreNumber">
                 Number of cores
             </label>
         </div>
         <div class="col">
-            <input required (ngModel)="cpu.coreNumber" id="coreNumber" class="form-control" type="number" name="coreNumber" value="0" />
+            <input  *ngIf="editing" required [(ngModel)]="cpu.coreNumber" id="coreNumber" class="form-control" type="number" name="coreNumber"  />
+            <p *ngIf="!editing" id="brand">{{cpu.coreNumber}}</p>
         </div>
     </div>
-    <div class="form-group row">
+    <div class="form-group row" style="min-height:40px;">
         <div class="col">
             <label class="form-label col" for="threadNumber">
                 Number of threads
             </label>
         </div>
         <div class="col">
-            <input required (ngModel)="cpu.threadNumber" id="threadNumber" class="form-control" type="number" name="threadNumber" value="0" />
+            <input  *ngIf="editing" required [(ngModel)]="cpu.threadNumber" id="threadNumber" class="form-control" type="number" name="threadNumber"  />
+            <p *ngIf="!editing" id="brand">{{cpu.threadNumber}}</p>
         </div>
     </div>
-    <div class="form-group row">
+    <div class="form-group row" style="min-height:40px;">
         <div class="col">
             <label class="form-label col" for="tdp">
                 TDP
@@ -62,14 +83,17 @@
         </div>
         <div class="col">
             <div class="input-group">
-                <input required (ngModel)="cpu.tdp" id="tdp" class="form-control" type="number" name="tdp" value="0" />
-                <p class="input-group-text">
+                <input  *ngIf="editing" required [(ngModel)]="cpu.tdp" id="tdp" class="form-control" type="number" name="tdp"  />
+                <p *ngIf="!editing" id="brand">
+                    {{cpu.tdp}} W
+                </p>
+                <p *ngIf="editing" class="input-group-text">
                     W
                 </p>
             </div>
         </div>
     </div>
-    <div class="form-group row">
+    <div class="form-group row" style="min-height:40px;">
         <div class="col">
             <label class="form-label col" for="price">
                 Price
@@ -77,27 +101,35 @@
         </div>
         <div class="col">
             <div class="input-group">
-                <input required (ngModel)="cpu.price" id="price" class="form-control" type="number" step="0.01" name="price" value="0" />
-                <p class="input-group-text">
+                <input  *ngIf="editing" required [(ngModel)]="cpu.price" id="price" class="form-control" type="number" step="0.01" name="price"  />
+                <p *ngIf="!editing" id="brand">
+                    {{cpu.price}} €
+                </p>
+                <p *ngIf="editing" class="input-group-text">
                     €
                 </p>
             </div>
         </div>
     </div>
-    <div class="form-group row">
+    <div class="form-group row" style="min-height:40px;">
         <div class="col">
             <label class="form-label col" for="socket">
                 Socket
             </label>
         </div>
         <div class="col">
-            <select (ngModel)='cpu.socket' name="socket" id="socket" class="form-control" aria-placeholder="Socket" >
+            <select  *ngIf="editing" [(ngModel)]='cpu.socket' name="socket" id="socket" class="form-control" aria-placeholder="Socket" >
                 <option *ngFor="let socket of socketList" value={{socket.id}}>{{socket.name}}</option>
             </select>
+            <p *ngIf="!editing" id="brand">{{idToSocket(cpu.socket)}}</p>
         </div>
     </div>
     <hr />
-    <div class="form-group row" style="float: right; padding-right: 1vw;">
-        <input required id="submit" class="btn btn-outline-success" type="submit" value="Submit" />
+    <div class="form-group row" style="float: right; padding-right: 1vw; min-height: 38px;">
+        <button *ngIf="editing" required id="submit" class="btn btn-success" [disabled]="!cpuForm.valid" type="submit">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+            </svg>
+        </button>
     </div>
 </form>

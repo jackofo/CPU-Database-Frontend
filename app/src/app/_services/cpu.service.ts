@@ -32,4 +32,9 @@ export class CpuService
 
     return this.http.post<string>(this.url + '/add', cpu, httpOptions);
   }
+
+  Delete(id) : Observable<string>
+  {
+    return this.http.get<string>(this.url + '/delete?id=' + id);
+  }
 }

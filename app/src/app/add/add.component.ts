@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CpuService } from '../_services/cpu.service';
 import { SocketService } from '../_services/socket.service';
 import { Socket } from '../_models/socket';
@@ -14,18 +14,63 @@ export class AddComponent implements OnInit {
 
   constructor(private cpuService : CpuService, private socketService : SocketService) { }
 
+  cpu : Cpu;
   socketList : Socket[];
+  @Input() editId : number;
+  editing : boolean;
+  @Input() adding : boolean;
 
   ngOnInit()
   {
+    this.editing = true;
+    this.editingSwitch();
     this.socketService.All().subscribe(response => this.socketList = response);
+    this.cpu = {
+      clockSpeed : 0,
+      coreNumber : 1,
+      price : 0,
+      tdp : 0,
+      threadNumber : 1,
+      brand : '',
+      id : null,
+      model : '',
+      socket : 1
+    };
+
+    if(this.editId != null)
+    {
+      this.cpuService.Get(this.editId).subscribe(response => this.cpu = response);
+    }
   }
 
-  add(c : NgForm)
+  add()
   {
-    if(c.value.socket >= 0)
+    this.cpuService.Add(this.cpu).subscribe(response => console.log(response));
+    window.location.reload();
+  }
+
+  editingSwitch()
+  {
+    if(this.adding)
     {
-        this.cpuService.Add(c.value).subscribe(response2 => console.log(response2));
+      this.editing = true;
     }
+    else
+    {
+      this.editing = !this.editing;
+    }
+  }
+
+  idToSocket(id) : string
+  {
+    let socketName : string;
+    this.socketList?.forEach(s => {
+      if(s.id == id)
+      {
+        socketName = s.name;
+      }
+    });
+
+    return socketName;
   }
 }

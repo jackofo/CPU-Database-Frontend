@@ -9,7 +9,7 @@ export interface Cpu
     threadNumber : number;
     tdp : number;
     price : number;
-    socket : Socket;
+    socket : number;
     brand : string;
 }
 
