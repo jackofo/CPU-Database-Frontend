@@ -18,6 +18,11 @@ export class CpuService
     return this.http.get<CpuShort[]>(this.url + '/all');
   }
 
+  Get(id) : Observable<Cpu>
+  {
+    return this.http.get<Cpu>(this.url + '/get?id=' + id);
+  }
+
   Add(cpu) : Observable<string>
   {
     const httpOptions = 

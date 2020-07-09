@@ -25,11 +25,7 @@ export class AddComponent implements OnInit {
   {
     if(c.value.socket >= 0)
     {
-      this.socketService.Get(c.value.socket).subscribe(response1 => 
-      {
-        c.value.socket = response1;
         this.cpuService.Add(c.value).subscribe(response2 => console.log(response2));
-      });
     }
   }
 }

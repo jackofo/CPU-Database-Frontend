@@ -18,7 +18,7 @@
             <td>{{cpu?.brand}}</td>
             <td>{{cpu?.model}}</td>
             <td>{{cpu?.socket?.name}}</td>
-            <td><button class="btn btn-link">Edit</button></td>
+            <td><button class="btn btn-link" (click)="openEditForm(cpu?.id)">Edit</button></td>
           </tr>
         </tbody>
         <tfoot>
@@ -28,13 +28,23 @@
     </div>
   </div>
 </div>
-<div *ngIf="isOpen" class="container-fluid" style="position: fixed; width: 100%; height: 100%; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.7);">
+<div *ngIf="isAddWindowOpen" class="container-fluid" style="position: fixed; width: 100%; height: 100%; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.7);">
   <div class="row justify-content-center">
     <div class="col-md-5" id="window" style="background-color:white; border: 1px black; border-radius: 5px; margin-top: 10px; padding: 1%;">
-      <button class="close" (click)="closeAddForm()" style="float:right;">&times;</button>
+      <button class="close" (click)="closeAddForm()" style="float:right; padding-right: 1vw;">&times;</button>
       <h4>Add new model</h4>
       <hr />
       <app-add></app-add>
+    </div>
+  </div>
+</div>
+<div *ngIf="isEditWindowOpen" class="container-fluid" style="position: fixed; width: 100%; height: 100%; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.7);">
+  <div class="row justify-content-center">
+    <div class="col-md-5" id="window" style="background-color:white; border: 1px black; border-radius: 5px; margin-top: 10px; padding: 1%;">
+      <button class="close" (click)="closeEditForm()" style="float:right; padding-right: 1vw;">&times;</button>
+      <h4>Add new model</h4>
+      <hr />
+      <app-edit [editId]=editId></app-edit>
     </div>
   </div>
 </div>

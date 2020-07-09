@@ -12,12 +12,14 @@ import { from } from 'rxjs';
 export class AppComponent implements OnInit 
 {
   title = 'CPU Database';
-  isOpen : boolean;
+  isAddWindowOpen : boolean;
+  isEditWindowOpen : boolean;
   cpuList : CpuShort[];
+  editId : number;
 
   constructor(private service : CpuService)
   {
-    this.isOpen = false;
+    this.isAddWindowOpen = false;
   }
 
   ngOnInit()
@@ -27,11 +29,22 @@ export class AppComponent implements OnInit
 
   openAddForm()
   {
-    this.isOpen = true;
+    this.isAddWindowOpen = true;
   }
 
   closeAddForm()
   {
-    this.isOpen = false;
+    this.isAddWindowOpen = false;
+  }
+
+  openEditForm(id)
+  {
+    this.editId = id;
+    this.isEditWindowOpen = true;
+  }
+
+  closeEditForm()
+  {
+    this.isEditWindowOpen = false;
   }
 }
