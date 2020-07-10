@@ -19,9 +19,11 @@ export class AddComponent implements OnInit {
   @Input() editId : number;
   editing : boolean;
   @Input() adding : boolean;
+  loading : boolean;
 
   ngOnInit()
   {
+    this.loading = true;
     this.editing = true;
     this.editingSwitch();
     this.socketService.All().subscribe(response => this.socketList = response);
@@ -39,7 +41,12 @@ export class AddComponent implements OnInit {
 
     if(this.editId != null)
     {
-      this.cpuService.Get(this.editId).subscribe(response => this.cpu = response);
+      this.loading = true;
+      this.cpuService.Get(this.editId).subscribe(response => { this.cpu = response; this.loading = false; });
+    }
+    else
+    {
+      this.loading = false;
     }
   }
 

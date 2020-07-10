@@ -9,7 +9,7 @@ import { Cpu, CpuShort } from '../_models/cpu';
 
 export class CpuService 
 {
-  url = 'http://localhost:8081/cpu';
+  url = /*'http://localhost:8081/*/'cpu';
 
   constructor(private http : HttpClient) { }
 

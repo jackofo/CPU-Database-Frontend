@@ -8,7 +8,7 @@ import { Socket } from '../_models/socket';
 })
 export class SocketService 
 {
-  url = 'http://localhost:8081/socket';
+  url = /*'http://localhost:8081*/'/socket';
 
   constructor(private http : HttpClient) { }
 
